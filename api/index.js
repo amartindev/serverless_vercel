@@ -1,7 +1,11 @@
 const express = require('express');
+const cors = require('cors'); // Import the cors package
 const app = express();
 
-// Middleware para leer el cuerpo de las solicitudes como JSON
+// Enable CORS for all origins
+app.use(cors());
+
+// Middleware to parse the request body as JSON
 app.use(express.json());
 
 // GET request route
@@ -26,8 +30,5 @@ app.delete('/test', (req, res) => {
   res.json({ message: 'DELETE request received successfully' });
 });
 
-// Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// Export the app as a module for Vercel
+module.exports = app;
